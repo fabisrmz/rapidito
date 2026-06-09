@@ -2,9 +2,21 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FoodsModule } from './foods/foods.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [FoodsModule],
+  imports: [
+      TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'Fabi2026',
+      database: 'foodtruck',
+      autoLoadEntities: true,
+      synchronize: true,  
+    }),
+    FoodsModule],
   controllers: [AppController],
   providers: [AppService],
 })
