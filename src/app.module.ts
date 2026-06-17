@@ -3,10 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FoodsModule } from './foods/foods.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth/auth.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
-      TypeOrmModule.forRoot({
+    TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
@@ -14,9 +17,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: 'Fabi2026',
       database: 'foodtruck',
       autoLoadEntities: true,
-      synchronize: true,  
+      synchronize: true,
     }),
-    FoodsModule],
+    FoodsModule,
+    UsersModule,
+    AuthModule,
+    CategoriesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
