@@ -1,9 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  //UseGuards,
+} from '@nestjs/common';
 import { FoodsService } from './foods.service';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
 
+
+
 @Controller('foods')
+// @UseGuards(AuthGuard('jwt'))
 export class FoodsController {
   constructor(private readonly foodsService: FoodsService) {}
 
@@ -23,7 +35,10 @@ export class FoodsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFoodDto: UpdateFoodDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateFoodDto: UpdateFoodDto,
+  ) {
     return this.foodsService.update(+id, updateFoodDto);
   }
 
@@ -31,4 +46,6 @@ export class FoodsController {
   remove(@Param('id') id: string) {
     return this.foodsService.remove(+id);
   }
+
+  
 }

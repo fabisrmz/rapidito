@@ -1,19 +1,30 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
+import { Category } from 'src/categories/entities/category.entity';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from 'typeorm';
 
 @Entity()
-export class Food {
-    @PrimaryGeneratedColumn()
-    id!: number;
-    @Column()
-    name!: string;
-    @Column()
-    description!: string;
-    @Column()
-    price!: number;
-    @Column()
-    image!: string;
-    @Column()
-    category!: string;   
-    @Column({default: true})
-    isAvailable!: boolean;
+export class Food extends BaseEntity {
+
+  @PrimaryGeneratedColumn()
+  id!: number;
+
+  @Column()
+  name!: string;
+
+  @Column()
+  description!: string;
+
+  @Column()
+  price!: number;
+
+  @Column()
+  image!: string;
+
+  
+
+  @Column({ default: true })
+  isAvailable!: boolean;
+
+  @ManyToOne(() => Category, (category) => category.foods, {nullable: false})
+  category!: Category;
+
 }
